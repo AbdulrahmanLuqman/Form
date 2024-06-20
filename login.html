@@ -9,35 +9,31 @@
 </head>
 <body>
    <div id="app">
-    <form id="regForm">
+    <form id="logInForm">
         <h1>Welcome To LAZ</h1>
-        <input id="name" type="text" placeholder="Username">
         <input id="email" type="email" placeholder="Email">
         <input id="password" type="password" placeholder="Password">
-        <button class="button">Sign Up</button>
+        <button class="button">Log In</button>
     </form>
 
-    <p>or <a href="/login.html">Log In</a> if you already have an account</p>
+    <p>or <a href="/form.html">Sign Up</a> if you don't have an account</p>
    </div>
 
    <script>
-        document.getElementById("regForm").addEventListener("submit", function(e){
-            e.preventDefault();
-            const name = document.getElementById("name").value
+        document.getElementById("logInForm").addEventListener("submit", function(e){
+            e.preventDefault()
             const email = document.getElementById("email").value
             const password = document.getElementById("password").value
 
-            fetch("https://codeguru.isaac0yen.com/api/users/register", {
+            fetch("https://codeguru.isaac0yen.com/api/users/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({name, email, password})
+                body: JSON.stringify({email, password})
             })
             .then(res => res.json())
-            .then(data => {
-                data.message === "User Registered" ? alert("User Successfully Registered") : "Registration failed"
-            })
+            .then(data => console.log(data))
             .catch(error => console.error("Error:", error))
         })
    </script>
